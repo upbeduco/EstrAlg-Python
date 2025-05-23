@@ -1,3 +1,6 @@
+# cd src
+# python3 -m 08_BST.test_bst
+
 import unittest
 from .bst import BST
 
