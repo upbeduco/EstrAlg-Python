@@ -231,7 +231,7 @@ class TestBST(unittest.TestCase):
         expected_pre_order = ['S', 'E', 'A', 'C', 'R', 'H', 'M', 'L', 'P', 'X']
         self.assertEqual(bst.pre_order_keys(), expected_pre_order)
         
-        expected_post_order = ['C', 'A', 'L', 'P', 'M', 'H', 'X', 'R', 'E', 'S']
+        expected_post_order = ['C', 'A', 'L', 'P', 'M', 'H', 'R', 'E', 'X', 'S'] # Corrected expected post-order list
         self.assertEqual(bst.post_order_keys(), expected_post_order)
 
 if __name__ == '__main__':
