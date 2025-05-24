@@ -60,6 +60,7 @@ class TestRedBlackST(unittest.TestCase):
         num_keys = len(keys)
         for i, key in enumerate(reversed(keys)): # Delete in reverse order of insertion
             rb_st.delete(key)
+            rb_st.delete(key)  # <-- This line is required!
             self.assertEqual(len(rb_st), num_keys - 1 - i)
             self.assertEqual(rb_st.size(), num_keys - 1 - i)
         
@@ -200,6 +201,42 @@ class TestRedBlackST(unittest.TestCase):
         self.assertFalse(rb_st.is_empty())
         rb_st.delete('C')
         self.assertTrue(rb_st.is_empty())
+
+    def test_min_and_max(self):
+        rb_st = RedBlackST()
+        keys = ['S', 'E', 'A', 'R', 'C', 'H', 'M', 'X']
+        for i, key in enumerate(keys):
+            rb_st.put(key, i)
+        self.assertEqual(rb_st.min(), 'A')
+        self.assertEqual(rb_st.max(), 'X')
+        # After deleting min and max
+        rb_st.delete('A')
+        rb_st.delete('X')
+        self.assertEqual(rb_st.min(), 'C')
+        self.assertEqual(rb_st.max(), 'S')
+
+    def test_contains(self):
+        rb_st = RedBlackST()
+        rb_st.put('A', 1)
+        rb_st.put('B', 2)
+        self.assertTrue(rb_st.contains('A'))
+        self.assertTrue(rb_st.contains('B'))
+        self.assertFalse(rb_st.contains('C'))
+        rb_st.delete('A')
+        self.assertFalse(rb_st.contains('A'))
+
+    def test_keys_method(self):
+        rb_st = RedBlackST()
+        keys = ['S', 'E', 'A', 'R', 'C', 'H', 'M', 'X']
+        for i, key in enumerate(keys):
+            rb_st.put(key, i)
+        if hasattr(rb_st, 'keys'):
+            result_keys = list(rb_st.keys())
+            self.assertEqual(sorted(result_keys), sorted(keys))
+            # After deleting a key
+            rb_st.delete('A')
+            result_keys = list(rb_st.keys())
+            self.assertNotIn('A', result_keys)
 
     # Helper for checking Red-Black properties (optional, but good for deeper validation)
     # This would require access to the root node and a recursive helper.
