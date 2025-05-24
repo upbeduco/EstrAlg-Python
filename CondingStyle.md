@@ -14,11 +14,12 @@
 - Avoid global variables when possible.
 - Prefer list comprehensions and generator expressions for simple cases.
 - Use built-in functions and standard library modules when possible.
-- Handle exceptions explicitly; avoid bare `except:` clauses.
 - Keep functions small and focused on a single task.
 - Write modular, reusable code.
 - Remove unused imports and variables.
 - Always include type annotations where applicable.
+- Constants should be all-caps.
+- Private variables should have prefix '_'
 
 ## Imports
 - Place all imports at the top of the file.
@@ -39,8 +40,37 @@
 - Commit small, focused changes with clear commit messages.
 - Do not commit secrets or sensitive data.
 
-## Type hints
-- Use type hints for function signatures and variable declarations where appropriate.
+## Type Hints
+- Use type hints for all new code (PEP 484)
+- Annotate all function parameters and return values
+- Use `Optional[T]` for nullable values
+- Prefer `Union[T1, T2]` over `T1 | T2` for compatibility
+- Use forward references (`"ClassName"`) for circular dependencies
+- Use `typing` module constructs for complex types:
+  - `List`, `Dict`, `Set`, `Tuple`
+  - `Callable`, `Iterable`, `Mapping`
+  - `Any`, `NoReturn`, etc.
+
+## Error Handling
+- Handle exceptions explicitly; avoid bare `except:` clauses.
+- Use specific exception classes rather than bare exceptions
+- Create custom exception classes for domain-specific errors
+- Include relevant context in exception messages
+- Use `raise ... from` for exception chaining (PEP 3134)
+- Log exceptions appropriately before re-raising
+- Consider error recovery paths where possible
+
+## Logging
+- Use the `logging` module instead of `print()`
+- Configure logging at application entry point
+- Use appropriate log levels:
+  - DEBUG: Detailed debugging information
+  - INFO: Normal operational messages
+  - WARNING: Potential issues
+  - ERROR: Serious problems
+  - CRITICAL: Critical failures
+- Include structured data in log messages when useful
+- Avoid sensitive data in logs
 
 ## Formatting tools
 - Use tools like `black` or `autopep8` for automatic code formatting.
