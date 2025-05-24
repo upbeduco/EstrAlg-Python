@@ -17,7 +17,7 @@ class RedBlackST:
         self.root: Optional[Node] = None
 
     def is_red(self, node: Optional[Node]) -> bool:
-        # Check if node is red; None is considered black
+        """Return True if node is red; None is considered black."""
         if node is None:
             return False
         return node.color == Node.RED

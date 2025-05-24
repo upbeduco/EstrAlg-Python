@@ -11,6 +11,7 @@
 - Use 4 spaces per indentation level; **never use tabs**.
 - Limit lines to 79 characters.
 - Use meaningful variable, function, and class names.
+- Variable names follow snake_case.
 - Avoid global variables when possible.
 - Prefer list comprehensions and generator expressions for simple cases.
 - Use built-in functions and standard library modules when possible.
