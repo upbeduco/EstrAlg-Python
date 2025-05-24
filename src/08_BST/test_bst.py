@@ -231,8 +231,30 @@ class TestBST(unittest.TestCase):
         expected_pre_order = ['S', 'E', 'A', 'C', 'R', 'H', 'M', 'L', 'P', 'X']
         self.assertEqual(bst.pre_order_keys(), expected_pre_order)
         
-        expected_post_order = ['C', 'A', 'L', 'P', 'M', 'H', 'X', 'R', 'E', 'S']
+        expected_post_order = ['C', 'A', 'L', 'P', 'M', 'H', 'R', 'E', 'X', 'S']
         self.assertEqual(bst.post_order_keys(), expected_post_order)
+
+    def test_contains_and_getitem(self):
+        bst = BST()
+        keys = ['S', 'E', 'A', 'R']
+        values = [1, 2, 3, 4]
+        for k, v in zip(keys, values):
+            bst.put(k, v)
+
+        # Test __contains__
+        for k in keys:
+            self.assertIn(k, bst)
+        self.assertNotIn('Z', bst)
+        self.assertNotIn('B', bst)
+
+        # Test __getitem__
+        for k, v in zip(keys, values):
+            self.assertEqual(bst[k], v)
+        with self.assertRaises(KeyError):
+            _ = bst['Z']
+        with self.assertRaises(KeyError):
+            _ = bst['B']
 
 if __name__ == '__main__':
     unittest.main()
+
