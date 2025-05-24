@@ -18,6 +18,7 @@
 - Keep functions small and focused on a single task.
 - Write modular, reusable code.
 - Remove unused imports and variables.
+- Always include type annotations where applicable.
 
 ## Imports
 - Place all imports at the top of the file.

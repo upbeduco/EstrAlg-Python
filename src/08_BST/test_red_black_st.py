@@ -238,6 +238,17 @@ class TestRedBlackST(unittest.TestCase):
             result_keys = list(rb_st.keys())
             self.assertNotIn('A', result_keys)
 
+    def test_str_ascii_representation(self):
+        rb_st = RedBlackST()
+        for k in ['S', 'E', 'A', 'R', 'C', 'H', 'M']:
+            rb_st.put(k, ord(k))
+        tree_str = str(rb_st)
+        for k in ['S', 'E', 'A', 'R', 'C', 'H', 'M']:
+            self.assertRegex(tree_str, r"[\[\(]" + k + r"[\]\)]")
+        # Skip empty lines when checking the root
+        lines = [line for line in tree_str.splitlines() if line.strip()]
+        self.assertTrue(lines[0].startswith('[') or lines[0].startswith('('))
+
     # Helper for checking Red-Black properties (optional, but good for deeper validation)
     # This would require access to the root node and a recursive helper.
     # For now, we assume the external behavior implies internal correctness.
