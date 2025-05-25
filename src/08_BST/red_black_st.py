@@ -213,7 +213,6 @@ class RedBlackST:
             self.root = None
 
     def _delete(self, h: Node, key: Any) -> Optional[Node]:
-        # Recursive helper to delete node with key
         if key < h.key:
             if not self.is_red(h.left) and not self.is_red(h.left.left):
                 h = self.move_red_left(h)
@@ -221,8 +220,9 @@ class RedBlackST:
         else:
             if self.is_red(h.left):
                 h = self.rotate_right(h)
-            if key == h.key and (h.right is None):
-                return None
+            # Fix: Return left child if right is None
+            if key == h.key and h.right is None:
+                return h.left  # Corrected line
             if not self.is_red(h.right) and not self.is_red(h.right.left):
                 h = self.move_red_right(h)
             if key == h.key:
