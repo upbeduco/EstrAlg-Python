@@ -68,18 +68,6 @@ class RedBlackST:
         h.left.color = not h.left.color
         h.right.color = not h.right.color
 
-    def balance(self, h: Node) -> Node:
-        # Restore red-black tree properties after modifications
-        if self.is_red(h.right) and not self.is_red(h.left):
-            h = self.rotate_left(h)
-        if self.is_red(h.left) and self.is_red(h.left.left):
-            h = self.rotate_right(h)
-        if self.is_red(h.left) and self.is_red(h.right):
-            self.flip_colors(h)
-        h.count = 1 + self._size(h.left) + self._size(h.right)
-        print(f"Balancing node with key: {h.key}, count updated to: {h.count}")  # Debug print
-        return h
-
     def put(self, key: Any, value: Any) -> None:
         # Insert key-value pair into the tree
         if value is None:
@@ -198,6 +186,18 @@ class RedBlackST:
             self.flip_colors(h)
         return h
 
+    def balance(self, h: Node) -> Node:
+        # Restore red-black tree properties after modifications
+        if self.is_red(h.right) and not self.is_red(h.left):
+            h = self.rotate_left(h)
+        if self.is_red(h.left) and self.is_red(h.left.left):
+            h = self.rotate_right(h)
+        if self.is_red(h.left) and self.is_red(h.right):
+            self.flip_colors(h)
+        h.count = 1 + self._size(h.left) + self._size(h.right)
+        # print(f"Balancing node with key: {h.key}, count updated to: {h.count}")  # Debug print
+        return h
+
     def delete(self, key: Any) -> None:
         # Remove node with given key
         if key is None:
@@ -217,51 +217,33 @@ class RedBlackST:
         self.root.color = Node.BLACK
 
     def _delete(self, h: Optional[Node], key: Any) -> Optional[Node]:
-        print(f"Deleting key: {key}, current node key: {h.key if h else None}")
         if h is None:
-            print("Node is None, returning None")
             return None
 
         if key < h.key:
-            print(f"Key {key} < node key {h.key}, going left")
-            if h.left is not None and not self.is_red(h.left) and not (h.left.left and self.is_red(h.left.left)):
+            if not self.is_red(h.left) and h.left and not self.is_red(h.left.left):
                 h = self.move_red_left(h)
             h.left = self._delete(h.left, key)
         else:
-            print(f"Key {key} >= node key {h.key}")
             if self.is_red(h.left):
                 h = self.rotate_right(h)
             if key == h.key and h.right is None:
-                print(f"Key {key} == node key {h.key} and right is None, returning left")
-                # Update: Properly handle the count when returning left child
-                if h.left:
-                    h.left.count = h.count - 1
-                return h.left
-            if h.right is not None and not self.is_red(h.right) and not (h.right.left and self.is_red(h.right.left)):
+                return None  # No children case
+            if h.right and not self.is_red(h.right) and not self.is_red(h.right.left):
                 h = self.move_red_right(h)
             if key == h.key:
-                print(f"Key {key} == node key {h.key}, deleting node")
-                if h.right:
-                    x = self._min(h.right)
-                    h.key = x.key
-                    h.value = x.value
-                    h.right = self._delete_min(h.right)
-                    # Update: Update count after deletion
-                    h.count = 1 + self._size(h.left) + self._size(h.right)
-                else:
-                    return None
+                x = self._min(h.right)
+                h.key = x.key
+                h.value = x.value
+                h.right = self._delete_min(h.right)
             else:
-                print(f"Key {key} > node key {h.key}, going right")
                 h.right = self._delete(h.right, key)
 
-        if h is not None:
-            h = self.balance(h)
-            print(f"Returning node with key: {h.key if h else None}")
-            return h
-        else:
-            print("Returning None after deletion")
-            return None
-        
+        h = self.balance(h)
+        h.count = 1 + self._size(h.left) + self._size(h.right)
+        return h
+
+
     def __contains__(self, key: Any) -> bool:
         # Return True if key is in the tree, else False
         return self.get(key) is not None
@@ -307,3 +289,66 @@ if __name__ == "__main__":
         rbst.put(key, str(key))
     print("RedBlackST structure:")
     print(rbst)
+
+
+
+"""
+
+
+### **Deletion Process in a Red-Black Tree**
+1. **Find the node to delete** (same as BST).
+2. **Delete the node** (similar to BST, but with extra bookkeeping for RBT properties):
+   - **Case 1: No children** → Simply remove the node.
+   - **Case 2: One child** → Replace the node with its child.
+   - **Case 3: Two children** → Replace the node with its in-order successor/predecessor, then recursively delete the successor/predecessor.
+3. **Rebalance the tree** (the complex part for RBTs).
+
+---
+
+### **Rebalancing After Deletion**
+When a node is deleted, it may violate RBT properties (e.g., if a black node was removed, causing a "black deficit"). The rebalancing process involves fixing these violations by examining the **sibling** of the deleted node and its **nephews**.
+
+#### **Key Observations:**
+- The deleted node is either:
+  - A **red node** (no violation, since it doesn’t affect black height).
+  - A **black node** (violation: introduces a "double black" or "extra black" that must be resolved).
+- The rebalancing cases depend on the **color of the sibling** and **its children**.
+
+---
+
+### **Rebalancing Cases (Fixing "Double Black")**
+Let `x` be the "double black" node (the position where the deleted node was). We handle the following cases:
+
+#### **Case 1: Sibling is Red**
+- Rotate to make the sibling black.
+- Recurse to resolve the new sibling (now black).
+
+#### **Case 2: Sibling is Black and Both Nephews are Black**
+- Recolor the sibling to **red**.
+- Propagate the "double black" upward to the parent.
+
+#### **Case 3: Sibling is Black, Near Nephew is Red, Far Nephew is Black**
+- Rotate to make the near nephew the new sibling.
+- Recurse into **Case 4**.
+
+#### **Case 4: Sibling is Black, Far Nephew is Red**
+- Rotate the sibling to balance the tree.
+- Recolor to restore RBT properties.
+
+---
+
+### **Your Rebalancing Cases vs. Correct Ones**
+Your description of "Left-Left," "Left-Right," etc., is **partially correct but incomplete**:
+- The actual cases depend on **color**, not just structure.
+- The standard RBT deletion fixes involve **4 main cases** (as above), not just rotations.
+
+---
+
+### **Final Notes**
+- Your initial steps (finding the node, BST deletion) are correct.
+- The rebalancing part needs refinement to properly handle the "double black" scenarios.
+- The correct cases are based on **sibling and nephew colors**, not just their positions.
+
+Would you like a more detailed breakdown of the rebalancing steps?
+
+"""
