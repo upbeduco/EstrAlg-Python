@@ -58,9 +58,10 @@ class TestRedBlackST(unittest.TestCase):
             self.assertFalse(rb_st.is_empty())
         
         num_keys = len(keys)
+        print(f"num_keys = {num_keys}")
         for i, key in enumerate(reversed(keys)): # Delete in reverse order of insertion
             rb_st.delete(key)
-            rb_st.delete(key)  # <-- This line is required!
+            print(len(rb_st), num_keys - 1 - i)
             self.assertEqual(len(rb_st), num_keys - 1 - i)
             self.assertEqual(rb_st.size(), num_keys - 1 - i)
         

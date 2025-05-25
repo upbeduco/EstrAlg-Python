@@ -77,6 +77,7 @@ class RedBlackST:
         if self.is_red(h.left) and self.is_red(h.right):
             self.flip_colors(h)
         h.count = 1 + self._size(h.left) + self._size(h.right)
+        print(f"Balancing node with key: {h.key}, count updated to: {h.count}")  # Debug print
         return h
 
     def put(self, key: Any, value: Any) -> None:
@@ -205,35 +206,62 @@ class RedBlackST:
             return
         if not self.is_red(self.root.left) and not self.is_red(self.root.right):
             self.root.color = Node.RED
+            
         self.root = self._delete(self.root, key)
-        if self.root is not None:
-            self.root.color = Node.BLACK
-        # Fix: If the tree is empty after deletion, ensure root is None
-        if self.size() == 0:
+        
+        # Fix: If root becomes None or tree is empty after deletion, ensure root is None
+        if self.root is None or self.size() == 0:
             self.root = None
+            return
+            
+        self.root.color = Node.BLACK
 
-    def _delete(self, h: Node, key: Any) -> Optional[Node]:
+    def _delete(self, h: Optional[Node], key: Any) -> Optional[Node]:
+        print(f"Deleting key: {key}, current node key: {h.key if h else None}")
+        if h is None:
+            print("Node is None, returning None")
+            return None
+
         if key < h.key:
-            if not self.is_red(h.left) and not self.is_red(h.left.left):
+            print(f"Key {key} < node key {h.key}, going left")
+            if h.left is not None and not self.is_red(h.left) and not (h.left.left and self.is_red(h.left.left)):
                 h = self.move_red_left(h)
             h.left = self._delete(h.left, key)
         else:
+            print(f"Key {key} >= node key {h.key}")
             if self.is_red(h.left):
                 h = self.rotate_right(h)
-            # Fix: Return left child if right is None
             if key == h.key and h.right is None:
-                return h.left  # Corrected line
-            if not self.is_red(h.right) and not self.is_red(h.right.left):
+                print(f"Key {key} == node key {h.key} and right is None, returning left")
+                # Update: Properly handle the count when returning left child
+                if h.left:
+                    h.left.count = h.count - 1
+                return h.left
+            if h.right is not None and not self.is_red(h.right) and not (h.right.left and self.is_red(h.right.left)):
                 h = self.move_red_right(h)
             if key == h.key:
-                x = self._min(h.right)
-                h.key = x.key
-                h.value = x.value
-                h.right = self._delete_min(h.right)
+                print(f"Key {key} == node key {h.key}, deleting node")
+                if h.right:
+                    x = self._min(h.right)
+                    h.key = x.key
+                    h.value = x.value
+                    h.right = self._delete_min(h.right)
+                    # Update: Update count after deletion
+                    h.count = 1 + self._size(h.left) + self._size(h.right)
+                else:
+                    return None
             else:
+                print(f"Key {key} > node key {h.key}, going right")
                 h.right = self._delete(h.right, key)
-        return self.balance(h)
 
+        if h is not None:
+            h = self.balance(h)
+            print(f"Returning node with key: {h.key if h else None}")
+            return h
+        else:
+            print("Returning None after deletion")
+            return None
+        
     def __contains__(self, key: Any) -> bool:
         # Return True if key is in the tree, else False
         return self.get(key) is not None
