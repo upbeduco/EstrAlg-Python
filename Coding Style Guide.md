@@ -78,4 +78,6 @@
 - Use `flake8` or `pylint` for linting and code quality checks.
 
 
-
+## References 
+- [Khan Academy Style Guide](https://www.khanacademy.org/computing/intro-to-python-fundamentals/x5279a44ae0ab15d6:computational-thinking-with-variables/x5279a44ae0ab15d6:arithmetic-expressions/a/python-style-guide)  
+- [Python Style Guide - UChicago](https://uchicago-cs.github.io/student-resource-guide/style-guide/python.html)
