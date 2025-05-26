@@ -56,10 +56,13 @@ class TestRedBlackST(unittest.TestCase):
             self.assertEqual(len(rb_st), i + 1)
             self.assertEqual(rb_st.size(), i + 1)
             self.assertFalse(rb_st.is_empty())
-        
+        print(str(rb_st))        
+
         num_keys = len(keys)
+        print(f"num_keys = {num_keys}")
         for i, key in enumerate(reversed(keys)): # Delete in reverse order of insertion
             rb_st.delete(key)
+            print(len(rb_st), num_keys - 1 - i)
             self.assertEqual(len(rb_st), num_keys - 1 - i)
             self.assertEqual(rb_st.size(), num_keys - 1 - i)
         
@@ -200,6 +203,53 @@ class TestRedBlackST(unittest.TestCase):
         self.assertFalse(rb_st.is_empty())
         rb_st.delete('C')
         self.assertTrue(rb_st.is_empty())
+
+    def test_min_and_max(self):
+        rb_st = RedBlackST()
+        keys = ['S', 'E', 'A', 'R', 'C', 'H', 'M', 'X']
+        for i, key in enumerate(keys):
+            rb_st.put(key, i)
+        self.assertEqual(rb_st.min(), 'A')
+        self.assertEqual(rb_st.max(), 'X')
+        # After deleting min and max
+        rb_st.delete('A')
+        rb_st.delete('X')
+        self.assertEqual(rb_st.min(), 'C')
+        self.assertEqual(rb_st.max(), 'S')
+
+    def test_contains(self):
+        rb_st = RedBlackST()
+        rb_st.put('A', 1)
+        rb_st.put('B', 2)
+        self.assertTrue(rb_st.contains('A'))
+        self.assertTrue(rb_st.contains('B'))
+        self.assertFalse(rb_st.contains('C'))
+        rb_st.delete('A')
+        self.assertFalse(rb_st.contains('A'))
+
+    def test_keys_method(self):
+        rb_st = RedBlackST()
+        keys = ['S', 'E', 'A', 'R', 'C', 'H', 'M', 'X']
+        for i, key in enumerate(keys):
+            rb_st.put(key, i)
+        if hasattr(rb_st, 'keys'):
+            result_keys = list(rb_st.keys())
+            self.assertEqual(sorted(result_keys), sorted(keys))
+            # After deleting a key
+            rb_st.delete('A')
+            result_keys = list(rb_st.keys())
+            self.assertNotIn('A', result_keys)
+
+    def test_str_ascii_representation(self):
+        rb_st = RedBlackST()
+        for k in ['S', 'E', 'A', 'R', 'C', 'H', 'M']:
+            rb_st.put(k, ord(k))
+        tree_str = str(rb_st)
+        for k in ['S', 'E', 'A', 'R', 'C', 'H', 'M']:
+            self.assertRegex(tree_str, r"[\[\(]" + k + r"[\]\)]")
+        # Check if root line contains a black or red node marker
+        lines = [line for line in tree_str.splitlines() if line.strip()]
+        self.assertTrue(('[' in lines[0]) or ('(' in lines[0]))  # Corrected assertion
 
     # Helper for checking Red-Black properties (optional, but good for deeper validation)
     # This would require access to the root node and a recursive helper.
