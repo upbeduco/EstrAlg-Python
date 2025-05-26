@@ -1,4 +1,4 @@
-# Package for Hash Table implementations
+# Package Union-Find data structure
 
 
 
