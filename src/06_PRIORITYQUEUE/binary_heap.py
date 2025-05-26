@@ -71,12 +71,16 @@ class BinaryHeap:
     
     def __iter__(self) -> Iterator[Any]:
         """Return an iterator over the heap."""
-        # TODO: should iterate in the priority order of the keys
-        return iter(self._heap)
-    
+        self._iter_index = 0
+        return self
+
     def __next__(self) -> Any:
         """Return the next value in the heap."""
-        return next(self._heap)
+        if self._iter_index >= len(self._heap):
+            raise StopIteration
+        value = self._heap[self._iter_index]
+        self._iter_index += 1
+        return value
     
     def is_empty(self) -> bool:
         """Return True if the heap is empty, False otherwise."""
@@ -90,3 +94,9 @@ class BinaryHeap:
         """Remove all elements from the heap."""
         self._heap = []
     
+    def union(self, other: 'BinaryHeap'):
+        """Union with another binary heap."""
+        for value in other:
+            self.insert(value)
+
+        

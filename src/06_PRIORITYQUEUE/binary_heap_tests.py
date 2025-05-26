@@ -64,6 +64,43 @@ class TestBinaryHeap(unittest.TestCase):
         self.assertEqual(self.heap.max(), None)
         self.assertEqual(self.heap.del_max(), None)
 
+    def test_clear(self):
+        for i in range(10):
+            self.heap.insert(i)
+        self.assertFalse(self.heap.is_empty())
+        self.heap.clear()
+        self.assertTrue(self.heap.is_empty())
+        self.assertEqual(self.heap.size(), 0)
+        self.assertEqual(len(self.heap), 0)
+        self.assertEqual(str(self.heap), "[]")
+        self.assertEqual(list(self.heap), [])
+        self.assertEqual(self.heap.max(), None)
+        self.assertEqual(self.heap.del_max(), None)
+
+    def test_union(self):
+        heap1 = BinaryHeap()
+        heap2 = BinaryHeap()
+
+        for i in range(10):
+            heap1.insert(i)
+        for i in range(5, 15):
+            heap2.insert(i)
+
+        # Union of two heaps
+        heap1.union(heap2)
+
+        # Check the max value after union
+        self.assertEqual(heap1.max(), 14)
+
+        # Check the size after union
+        self.assertEqual(heap1.size(), 20)
+
+        # Check if all elements are present
+        expected_elements = set(range(15))
+        actual_elements = set(heap1)
+        self.assertEqual(expected_elements, actual_elements)
+
+        
 
 
 if __name__ == "__main__":
