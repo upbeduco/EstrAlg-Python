@@ -11,7 +11,7 @@ class TestBinaryHeap(unittest.TestCase):
         self.assertTrue(self.heap.is_empty())
         self.assertEqual(self.heap.size(), 0)
         self.assertEqual(len(self.heap), 0)
-        self.assertEqual(str(self.heap), "[]")
+        self.assertEqual(str(self.heap), "BinaryHeap()")
         self.assertEqual(list(self.heap), [])
         self.assertEqual(self.heap.max(), None)
         self.assertEqual(self.heap.del_max(), None)
@@ -35,7 +35,7 @@ class TestBinaryHeap(unittest.TestCase):
         self.assertTrue(self.heap.is_empty())
         self.assertEqual(self.heap.size(), 0)
         self.assertEqual(len(self.heap), 0)
-        self.assertEqual(str(self.heap), "[]")
+        self.assertEqual(str(self.heap), "BinaryHeap()")
         self.assertEqual(list(self.heap), [])
         self.assertEqual(self.heap.max(), None)
         self.assertEqual(self.heap.del_max(), None)
@@ -59,7 +59,7 @@ class TestBinaryHeap(unittest.TestCase):
         self.assertTrue(self.heap.is_empty())
         self.assertEqual(self.heap.size(), 0)
         self.assertEqual(len(self.heap), 0)
-        self.assertEqual(str(self.heap), "[]")
+        self.assertEqual(str(self.heap), "BinaryHeap()")
         self.assertEqual(list(self.heap), [])
         self.assertEqual(self.heap.max(), None)
         self.assertEqual(self.heap.del_max(), None)
@@ -72,7 +72,7 @@ class TestBinaryHeap(unittest.TestCase):
         self.assertTrue(self.heap.is_empty())
         self.assertEqual(self.heap.size(), 0)
         self.assertEqual(len(self.heap), 0)
-        self.assertEqual(str(self.heap), "[]")
+        self.assertEqual(str(self.heap), "BinaryHeap()")
         self.assertEqual(list(self.heap), [])
         self.assertEqual(self.heap.max(), None)
         self.assertEqual(self.heap.del_max(), None)
@@ -100,7 +100,33 @@ class TestBinaryHeap(unittest.TestCase):
         actual_elements = set(heap1)
         self.assertEqual(expected_elements, actual_elements)
 
+    def test_pythonic_operators(self):
+        """Test the len(), str(), contains() methods"""
+        self.heap.clear()
+        self.assertEqual(len(self.heap), 0)
+        self.assertEqual(str(self.heap), "BinaryHeap()")
+        self.assertNotIn(5, self.heap)
+        for i in range(3):
+            self.heap.insert(i)
+        self.assertEqual(len(self.heap), 3)
+        self.assertIn(0, self.heap)
+        self.assertIn(1, self.heap)
+        self.assertIn(2, self.heap)
+        self.assertNotIn(5, self.heap)
+        self.assertTrue(str(self.heap).startswith("BinaryHeap"))
         
+    def test_iter(self):
+        """Test the iterator functionality"""
+        self.heap.clear()
+        self.assertEqual(list(self.heap), [])
+        keys = [random.randint(0, 100) for _ in range(20)]
+        for key in keys:
+            self.heap.insert(key)
+        self.assertEqual(len(self.heap), 20)
+        iterated_keys = list(self.heap)
+        self.assertEqual(len(iterated_keys), 20)
+        self.assertEqual(set(iterated_keys), set(sorted(keys, reverse=True)))
+
 
 
 if __name__ == "__main__":

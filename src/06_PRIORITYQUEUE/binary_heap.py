@@ -57,9 +57,10 @@ class BinaryHeap:
             self._heap[index], self._heap[largest] = self._heap[largest], self._heap[index]
             index = largest
 
-    def __str__(self) -> str:
-        """Return a string representation of the heap."""
-        return str(self._heap)
+    def __str__(self):
+        if self.size() == 0:
+            return "BinaryHeap()"
+        return f"BinaryHeap({list(self)})"
 
     def __len__(self) -> int:
         """Return the number of elements in the heap."""

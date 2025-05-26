@@ -1,4 +1,5 @@
 import unittest
+import random
 from .binomial_heap import BinomialHeap
 
 class TestBinomialHeap(unittest.TestCase):
@@ -77,6 +78,34 @@ class TestBinomialHeap(unittest.TestCase):
         heap1.union(empty_heap)
         self.assertEqual(heap1.size(), 10)
         self.assertEqual(heap1.max(), 9)
+
+    def test_pythonic_operators(self):
+        """Test the len(), str(), contains() methods"""
+        self.heap.clear()
+        self.assertEqual(len(self.heap), 0)
+        self.assertEqual(str(self.heap), "BinomialHeap()")
+        self.assertNotIn(5, self.heap)
+        for i in range(3):
+            self.heap.insert(i)
+        self.assertEqual(len(self.heap), 3)
+        self.assertIn(0, self.heap)
+        self.assertIn(1, self.heap)
+        self.assertIn(2, self.heap)
+        self.assertNotIn(5, self.heap)
+        self.assertTrue(str(self.heap).startswith("BinomialHeap"))
+
+    def test_iter(self):
+        """Test the iterator functionality"""
+        self.heap.clear()
+        self.assertEqual(list(self.heap), [])
+        keys = [random.randint(0, 100) for _ in range(20)]
+        for key in keys:
+            self.heap.insert(key)
+        self.assertEqual(len(self.heap), 20)
+        iterated_keys = list(self.heap)
+        self.assertEqual(len(iterated_keys), 20)
+        self.assertEqual(set(iterated_keys), set(sorted(keys, reverse=True)))
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -110,3 +110,38 @@ class BinomialHeap:
             result += self._str_tree(child, depth + 1)
         return result
 
+    def __len__(self):
+        """Implement len() for BinomialHeap"""
+        return self.size()
+    
+    def __contains__(self, key):
+        """Implement 'in' operator for BinomialHeap"""
+        if self.is_empty():
+            return False
+        for root in self.roots:
+            if self._contains(root, key):
+                return True
+        return False
+
+    def _contains(self, node, key):
+        """Helper method to check if key exists in the tree rooted at node."""
+        if node.key == key:
+            return True
+        for child in node.children:
+            if self._contains(child, key):
+                return True
+        return False
+    
+    def _iter_tree(self, node, nodes):
+        if node is None:
+            return
+        nodes.append(node.key)
+        for child in node.children:
+            self._iter_tree(child, nodes)
+
+    def __iter__(self):
+        nodes = []
+        for root in self.roots:
+            self._iter_tree(root, nodes)
+        # Return in descending order if you want max-heap order
+        return iter(sorted(nodes, reverse=True))
