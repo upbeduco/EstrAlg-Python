@@ -202,16 +202,24 @@ class FibonacciHeap:
         return False
     
     def __iter__(self):
-        """Implement iteration over FibonacciHeap"""
+        for node in self._iterate_nodes():
+            yield node.key  # or node.value, depending on your implementation
+
+    def _iterate_nodes(self):
+        """Generator to iterate over all nodes in the heap (root list only)."""
         if self.is_empty():
-            return iter([])
+            return
+        visited = set()
         nodes = []
         x = self.max_node
         if x:
             while True:
+                if id(x) in visited:
+                    break
+                visited.add(id(x))
                 nodes.append(x)
                 x = x.right
                 if x == self.max_node:
                     break
-        return iter(nodes)
-    
+        for node in nodes:
+            yield node
