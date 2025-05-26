@@ -33,6 +33,7 @@ How does the heap structure help in this merging process?
 Design a data structure that supports:
 Inserting numbers one by one.
 At any time, efficiently finding the median of all inserted numbers.
+What is the time complexity for finding the median?
 
 **Hint**:
 Use two heaps: a max-heap for the lower half and a min-heap for the upper half.
