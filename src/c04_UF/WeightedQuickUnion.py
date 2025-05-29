@@ -1,5 +1,4 @@
-# Implementation of the QuickFind Union-Find ADT
-from src.utils.UnionFind import UnionFind
+from c04_UF.UnionFind import UnionFind
 
 class WeightedQuickUnion(UnionFind):
     """
@@ -19,7 +18,7 @@ class WeightedQuickUnion(UnionFind):
         Args:
             n (int): The number of elements.
         """
-        super().__init__(n)
+        super().__init__()
         self._parent = list(range(n))  # Stores the parent of each element
         self._size = [1] * n  # Stores the size of the component for each root
         self._count = n  # Number of components
@@ -112,3 +111,11 @@ class WeightedQuickUnion(UnionFind):
         if not (0 <= p < len(self._parent) and 0 <= q < len(self._parent)):
             raise ValueError(f"Elements {p} or {q} are out of bounds.")
         return self.find(p) == self.find(q)
+    
+if __name__=="__main__":
+    wqu = WeightedQuickUnion(5)
+    wqu.union(1,2)
+    wqu.union(0,4)
+    print(wqu.components())
+    print(wqu.is_connected(1,4))
+    print(wqu.is_connected(2,1))

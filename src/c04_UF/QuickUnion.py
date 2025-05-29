@@ -1,5 +1,5 @@
 # Implementation of the QuickFind Union-Find ADT
-from src.utils.UnionFind import UnionFind
+from c04_UF.UnionFind import UnionFind
 
 class QuickUnion(UnionFind):
     """
@@ -17,7 +17,7 @@ class QuickUnion(UnionFind):
         Args:
             n (int): The number of elements.
         """
-        super().__init__(n)
+        super().__init__()
         self._parent = list(range(n))  # Stores the parent of each element
         self._count = n  # Number of components
 
@@ -93,3 +93,11 @@ class QuickUnion(UnionFind):
         if not (0 <= p < len(self._parent) and 0 <= q < len(self._parent)):
             raise ValueError(f"Elements {p} or {q} are out of bounds.")
         return self.find(p) == self.find(q)
+    
+if __name__=="__main__":
+    qu = QuickUnion(5)
+    qu.union(1,2)
+    qu.union(0,4)
+    print(qu.components())
+    print(qu.is_connected(1,4))
+    print(qu.is_connected(2,1))    
