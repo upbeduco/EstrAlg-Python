@@ -58,3 +58,41 @@ class SequentialSearch:
             current = current.next
 
 # TODO add unit tests of the data structure
+
+if __name__ == "__main__":
+    ss = SequentialSearch()
+    assert ss.is_empty()
+    assert ss.size() == 0
+    assert ss.get("a") is None
+    assert not ss.contains("a")
+
+    ss.put("a", 1)
+    assert not ss.is_empty()
+    assert ss.size() == 1
+    assert ss.get("a") == 1
+    assert ss.contains("a")
+
+    ss.put("b", 2)
+    ss.put("c", 3)
+    assert ss.size() == 3
+    assert ss.get("b") == 2
+    assert ss.get("c") == 3
+
+    ss.put("a", 10)  # update
+    assert ss.get("a") == 10
+
+    ss.delete("b")
+    assert ss.size() == 2
+    assert not ss.contains("b")
+    assert ss.get("b") is None
+
+    ss.delete("a")
+    ss.delete("c")
+    assert ss.is_empty()
+    assert ss.size() == 0
+```
+
+src/c07_SEARCH/BinarySearch.py
+```python
+<<<<<<< SEARCH
+# TODO add unit tests of the data structure
