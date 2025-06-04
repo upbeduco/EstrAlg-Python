@@ -2,9 +2,10 @@
 
 ```mermaid
 mindmap
-  root((Sorting Algorithms))
+  root(("`Sorting
+Algorithms`"))
     SelectionSort
-        Time Complexity: "`$O(n^2)$`"
+        Time Complexity: O(n^2)
         Space Complexity: O(1)
         In place: Yes
         Stable: Yes
