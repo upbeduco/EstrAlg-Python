@@ -2,7 +2,7 @@
 
 Below are practical exercises to help you understand how Binary Search Trees (BST) and Red-Black Trees (RedBlackST) can be used to solve problems efficiently. For each exercise, think about how the tree structure enables efficient operations and how you would implement the solution.
 
-**Note:** For all exercises, you should use and extend the provided `bst.py` and `red_black_st.py` files as the basis for your implementations. Refer to `CONVENTIONS.md` for coding style guidelines.
+**Note:** For all exercises, you should use and extend the provided `bst.py` and `red_black_st.py` files as the basis for your implementations.
 
 ---
 
@@ -89,7 +89,7 @@ Implement a function to verify if a given binary tree satisfies the BST property
 **Problem:**  
 Write functions to compute:
 - The height of a BST or RedBlackST.
-- Whether the tree is balanced (height difference between left and right subtrees of every node is at most 1).
+- Whether the tree is balanced (height difference between left and right subtrees of every node is at most 1). **QUESTION**: Does the red-black tree satisfies this balance condition?
 
 **Questions:**  
 - How does tree height affect performance of operations?
