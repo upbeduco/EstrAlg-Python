@@ -1,7 +1,14 @@
 
 
 def ShellSort(a: list) -> list:
-    """Sort the list a using the shell sort algorithm and return the sorted list."""
+    """Sort the list a using the shell sort algorithm and return the sorted list.
+
+    Args:
+        a (list): The list of elements to be sorted.
+
+    Returns:
+        list: The sorted list.
+    """
     n = len(a)
     gap = n // 2
     while gap > 0:
