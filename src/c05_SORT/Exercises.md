@@ -44,3 +44,27 @@ These exercises are designed to help you practice and reinforce your understandi
 - Given different types of input data (e.g., nearly sorted, reverse sorted, random, with many duplicates), recommend the most suitable sorting algorithm from the provided implementations.
 - Justify your choices based on algorithm characteristics and empirical results.
 
+## Exercise 10: Space Complexity and In-Place Sorting
+- For each provided sorting algorithm, determine its space complexity (auxiliary space used).
+- Categorize them as "in-place" or "out-of-place" sorting algorithms.
+- Discuss the trade-offs between time complexity and space complexity for different algorithms.
+
+## Exercise 11: Worst-Case Input Generation
+- For QuickSort and SelectionSort, devise specific input lists that would lead to their worst-case time complexity.
+- Run the `SortingComparison.py` script with these worst-case inputs (you might need to modify `create_random_list` or manually create the lists) and observe the performance.
+- Explain why these inputs trigger the worst-case behavior for each algorithm.
+
+## Exercise 12: Sorting Custom Objects
+- Create a simple Python class (e.g., `Student` with attributes like `name`, `grade`, `age`).
+- Generate a list of `Student` objects.
+- Use one or more of the comparison-based sorting algorithms (e.g., InsertionSort, MergeSort, QuickSort) to sort this list based on:
+    - A single attribute (e.g., `grade`).
+    - Multiple attributes (e.g., primary sort by `grade`, secondary sort by `name`).
+- Document how you adapted the sorting function or used Python's `key` argument for `sort()` or `sorted()`.
+
+## Exercise 13: RadixSort for Non-Standard Data
+- The current `RadixSort` implementation assumes non-negative integers.
+- Discuss how `RadixSort` could be adapted to sort:
+    - Lists containing negative integers.
+    - Lists of strings (e.g., by sorting character by character).
+- Implement one of these adaptations and provide unit tests to demonstrate its correctness.
