@@ -1,6 +1,6 @@
 
 from typing import Optional, Any
-from src.c02_ESTBASICAS.LinkedList import LinkedList
+from c02_ESTBASICAS.LinkedList import LinkedList
 
 class SequentialSearch:
     """Sequential Search Symbol Table implemented with a linked list."""
