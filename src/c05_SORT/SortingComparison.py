@@ -1,3 +1,4 @@
+# python3 -m c05_SORT.SortingComparison
 
 import random
 import time
@@ -22,12 +23,12 @@ def compare_sorting_algorithms(n: int):
 
     algorithms = [
         ("CountSort", CountSort),
-        ("InsertionSort", InsertionSort),
+        ("RadixSort", RadixSort),
         ("MergeSort", MergeSort),
         ("QuickSort", QuickSort),
-        ("RadixSort", RadixSort),
-        ("SelectionSort", SelectionSort),
         ("ShellSort", ShellSort),
+        ("InsertionSort", InsertionSort),
+        ("SelectionSort", SelectionSort),
     ]
 
     for name, func in algorithms:
@@ -36,11 +37,11 @@ def compare_sorting_algorithms(n: int):
         sorted_list = func(data)
         end_time = time.perf_counter()
         elapsed = end_time - start_time
-        print(f"{name}: {elapsed:.6f} seconds")
+        print(f"{name:13s}: {elapsed:.6f} seconds")
 
 
 def main():
-    n = 50000  # You can adjust the size for testing
+    n = 20000  # You can adjust the size for testing
     print(f"Comparing sorting algorithms with list size: {n}")
     compare_sorting_algorithms(n)
 

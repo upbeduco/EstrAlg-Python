@@ -3,13 +3,10 @@
 These exercises are designed to help you practice and reinforce your understanding of various sorting algorithms.
 
 ## Exercise 1: Implement and Test CountSort
-- Implement the CountSort algorithm for sorting integer lists.
-- Write unit tests to verify your implementation with various input cases, including empty lists, lists with duplicates, and negative numbers.
-- Analyze the time and space complexity of your implementation.
+- Analyze the time and space complexity CountSort.
 
 ## Exercise 2: Analyze RadixSort Behavior
-- Use the provided RadixSort implementation to sort different lists of non-negative integers.
-- Create test cases with varying number lengths and sizes.
+- Perform a step-by-step analysis of the workings of RadixSort.
 - Measure and compare the performance of RadixSort against CountSort on large datasets.
 - Explain scenarios where RadixSort is more efficient than CountSort and vice versa.
 
@@ -47,6 +44,3 @@ These exercises are designed to help you practice and reinforce your understandi
 - Given different types of input data (e.g., nearly sorted, reverse sorted, random, with many duplicates), recommend the most suitable sorting algorithm from the provided implementations.
 - Justify your choices based on algorithm characteristics and empirical results.
 
----
-
-These exercises will help deepen your understanding of sorting algorithms, their implementation details, and their practical performance considerations.
