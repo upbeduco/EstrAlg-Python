@@ -1,7 +1,14 @@
 
 
 def RadixSort(a: list) -> list:
-    """Sort the list a using the radix sort algorithm and return the sorted list."""
+    """Sort the list a using the radix sort algorithm and return the sorted list.
+
+    Args:
+        a (list): The list of non-negative integers to be sorted.
+
+    Returns:
+        list: The sorted list.
+    """
     if len(a) == 0:
         return a
 

@@ -1,7 +1,14 @@
 
 
 def SelectionSort(a: list) -> list:
-    """Sort the list a using the selection sort algorithm and return the sorted list."""
+    """Sort the list a using the selection sort algorithm and return the sorted list.
+
+    Args:
+        a (list): The list of elements to be sorted.
+
+    Returns:
+        list: The sorted list.
+    """
     n = len(a)
     for i in range(n):
         min_index = i

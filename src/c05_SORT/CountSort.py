@@ -1,7 +1,14 @@
 
 
 def CountSort(a: list) -> list:
-    """Sort the list a using the count sort algorithm and return the sorted list."""
+    """Sort the list a using the count sort algorithm and return the sorted list.
+
+    Args:
+        a (list): The list of elements to be sorted.
+
+    Returns:
+        list: The sorted list.
+    """
     if len(a) == 0:
         return a
 
