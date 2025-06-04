@@ -5,16 +5,6 @@ from c02_ESTBASICAS.LinkedList import LinkedList
 class SequentialSearch:
     """Sequential Search Symbol Table implemented with a linked list."""
 
-    class Node:
-        def __init__(self, key: Any, value: Any):
-            self.key = key
-            self.value = value
-
-        def __eq__(self, other: object) -> bool:
-            if not isinstance(other, SequentialSearch.Node):
-                return False
-            return self.key == other.key
-
     def __init__(self):
         self._list = LinkedList()
         self._n: int = 0
@@ -44,7 +34,7 @@ class SequentialSearch:
             if node.key == key:
                 node.value = value
                 return
-        self._list.add(self.Node(key, value))
+        self._list.add(self._list.Node(key, value))
         self._n += 1
 
     def delete(self, key: Any) -> None:
