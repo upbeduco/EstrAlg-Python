@@ -1,11 +1,35 @@
 
 
 def SelectionSort(a: list) -> list:
-# TODO write an implementation of the selection sort algorithm
+    """Sort the list a using the selection sort algorithm and return the sorted list."""
+    n = len(a)
+    for i in range(n):
+        min_index = i
+        for j in range(i+1, n):
+            if a[j] < a[min_index]:
+                min_index = j
+        a[i], a[min_index] = a[min_index], a[i]
+    return a
 
 
+def test_SelectionSort():
+    """Unit test for SelectionSort."""
+    assert SelectionSort([3, 1, 4, 1, 5, 9, 2, 6, 5]) == [1, 1, 2, 3, 4, 5, 5, 6, 9]
+    assert SelectionSort([]) == []
+    assert SelectionSort([1]) == [1]
+    assert SelectionSort([2, 1]) == [1, 2]
+    assert SelectionSort([1, 2, 3]) == [1, 2, 3]
+    print("All tests passed.")
 
-# TODO write a unit test showing the correct operation of the sorting algorithm
 
-# TODO Exercise: Write a procedure that produces an annimation of the sorting process
+def animate_SelectionSort(a: list):
+    """Produce an animation of the selection sort process by printing the list at each step."""
+    n = len(a)
+    for i in range(n):
+        min_index = i
+        for j in range(i+1, n):
+            if a[j] < a[min_index]:
+                min_index = j
+        a[i], a[min_index] = a[min_index], a[i]
+        print(f"Step {i+1}: {a}")
 
