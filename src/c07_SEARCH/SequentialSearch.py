@@ -90,9 +90,3 @@ if __name__ == "__main__":
     ss.delete("c")
     assert ss.is_empty()
     assert ss.size() == 0
-```
-
-src/c07_SEARCH/BinarySearch.py
-```python
-<<<<<<< SEARCH
-# TODO add unit tests of the data structure
