@@ -57,5 +57,3 @@ These exercises are designed to deepen your understanding of sequential and bina
 - **TODO Exercise:** Implement the `floor(key)` method, which returns the largest key in the symbol table less than or equal to `key`. Return `None` if no such key exists.
 - **TODO Exercise:** Implement the `ceiling(key)` method, which returns the smallest key in the symbol table greater than or equal to `key`. Return `None` if no such key exists.
 - **TODO Exercise:** Implement the `keys_in_range(lo, hi)` method, which returns a list of all keys in the symbol table between `lo` and `hi` (inclusive).
-- Discuss how the array-based implementation of `BinarySearch` makes these operations efficient or challenging compared to a tree-based Binary Search Tree (BST).
-
