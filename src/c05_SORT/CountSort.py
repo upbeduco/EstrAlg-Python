@@ -25,9 +25,6 @@ def CountSort(a: list) -> list:
     return output
 
 
-# TODO write a unit test showing the correct operation of the sorting algorithm
-
-
 def _test_CountSort():
     test_cases = [
         ([5, 3, 8, 6, 2, 7, 4, 1], [1, 2, 3, 4, 5, 6, 7, 8]),
