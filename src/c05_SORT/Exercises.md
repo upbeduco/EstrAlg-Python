@@ -37,11 +37,12 @@ These exercises are designed to help you practice and reinforce your understandi
 
 ## Exercise 8: Extend SortingComparison
 - Add your own sorting algorithm implementation (e.g., BubbleSort or HeapSort) to the SortingComparison module.
+- Also, include Python's built-in `list.sort()` method and the `sorted()` function in your comparison.
 - Compare its performance with the existing algorithms on various list sizes.
 - Present your results and analyze the efficiency of your algorithm.
 
 ## Exercise 9: Sorting Algorithm Selection
-- Given different types of input data (e.g., nearly sorted, reverse sorted, random, with many duplicates), recommend the most suitable sorting algorithm from the provided implementations.
+- Given different types of input data (e.g., nearly sorted, reverse sorted, random, with many duplicates), recommend the most suitable sorting algorithm from the provided implementations, *including Python's built-in `list.sort()` and `sorted()`*.
 - Justify your choices based on algorithm characteristics and empirical results.
 
 ## Exercise 10: Space Complexity and In-Place Sorting
@@ -69,3 +70,9 @@ These exercises are designed to help you practice and reinforce your understandi
     - Lists containing negative integers.
     - Lists of strings (e.g., by sorting character by character).
 - Implement one of these adaptations and provide unit tests to demonstrate its correctness.
+
+## Exercise 14: Python's Built-in Sorting Functions
+- Research the algorithms used by Python's `list.sort()` method and the `sorted()` built-in function (Hint: Timsort).
+- Explain the key differences between these built-in functions and the sorting algorithms implemented in this package (e.g., stability, in-place vs. new list, hybrid approach).
+- Integrate `list.sort()` and `sorted()` into your `SortingComparison.py` script (from Exercise 8) and compare their performance against the other algorithms.
+- Analyze why Python's built-in sorting is often significantly faster for general-purpose sorting.
