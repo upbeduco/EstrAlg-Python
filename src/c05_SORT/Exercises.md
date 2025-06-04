@@ -54,13 +54,14 @@ These exercises are designed to help you practice and reinforce your understandi
 - Run the `SortingComparison.py` script with these worst-case inputs (you might need to modify `create_random_list` or manually create the lists) and observe the performance.
 - Explain why these inputs trigger the worst-case behavior for each algorithm.
 
-## Exercise 12: Sorting Custom Objects
+## Exercise 12: Sorting Custom Objects with Package Algorithms
 - Create a simple Python class (e.g., `Student` with attributes like `name`, `grade`, `age`).
+- To enable the sorting algorithms in this package to sort `Student` objects directly, implement the necessary rich comparison methods (e.g., `__lt__`, `__le__`, `__eq__`) within the `Student` class.
 - Generate a list of `Student` objects.
-- Use one or more of the comparison-based sorting algorithms (e.g., InsertionSort, MergeSort, QuickSort) to sort this list based on:
+- Use one or more of the comparison-based sorting algorithms from this package (e.g., `InsertionSort`, `MergeSort`, `QuickSort`, `SelectionSort`, `ShellSort`) to sort this list based on:
     - A single attribute (e.g., `grade`).
     - Multiple attributes (e.g., primary sort by `grade`, secondary sort by `name`).
-- Document how you adapted the sorting function or used Python's `key` argument for `sort()` or `sorted()`.
+- Explain how implementing these comparison methods allows the generic sorting algorithms to work with your custom objects.
 
 ## Exercise 13: RadixSort for Non-Standard Data
 - The current `RadixSort` implementation assumes non-negative integers.
