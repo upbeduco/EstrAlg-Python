@@ -32,7 +32,8 @@ def animate_SelectionSort(a: list):
             if a[j] < a[min_index]:
                 min_index = j
         a[i], a[min_index] = a[min_index], a[i]
-        print(f"Step {i+1}: {a}")
+        # Print the array showing the sorted part and the unsorted part separately
+        print(f"Step {i+1}: {a[:i+1]} + {a[i+1:]}")
 
 
 if __name__ == "__main__":
