@@ -1,17 +1,22 @@
 
 from typing import Optional, Any
+from src.c02_ESTBASICAS.LinkedList import LinkedList
 
 class SequentialSearch:
     """Sequential Search Symbol Table implemented with a linked list."""
 
     class Node:
-        def __init__(self, key: Any, value: Any, next: Optional['SequentialSearch.Node'] = None):
+        def __init__(self, key: Any, value: Any):
             self.key = key
             self.value = value
-            self.next = next
+
+        def __eq__(self, other: object) -> bool:
+            if not isinstance(other, SequentialSearch.Node):
+                return False
+            return self.key == other.key
 
     def __init__(self):
-        self._head: Optional[SequentialSearch.Node] = None
+        self._list = LinkedList()
         self._n: int = 0
 
     def size(self) -> int:
@@ -24,11 +29,9 @@ class SequentialSearch:
 
     def get(self, key: Any) -> Optional[Any]:
         """Return the value associated with key, or None if not found."""
-        current = self._head
-        while current is not None:
-            if current.key == key:
-                return current.value
-            current = current.next
+        for node in self._list:
+            if node.key == key:
+                return node.value
         return None
 
     def contains(self, key: Any) -> bool:
@@ -37,26 +40,25 @@ class SequentialSearch:
 
     def put(self, key: Any, value: Any) -> None:
         """Insert key-value pair into the symbol table, or update value if key exists."""
-        current = self._head
-        while current is not None:
-            if current.key == key:
-                current.value = value
+        for node in self._list:
+            if node.key == key:
+                node.value = value
                 return
-            current = current.next
-        self._head = self.Node(key, value, self._head)
+        self._list.add(self.Node(key, value))
         self._n += 1
 
     def delete(self, key: Any) -> None:
         """Remove key and its value from the symbol table if present."""
+        current = self._list._head
         prev = None
-        current = self._head
         while current is not None:
-            if current.key == key:
+            if current.data.key == key:
                 if prev is None:
-                    self._head = current.next
+                    self._list._head = current.next
                 else:
                     prev.next = current.next
                 self._n -= 1
+                self._list._size -= 1
                 return
             prev = current
             current = current.next
