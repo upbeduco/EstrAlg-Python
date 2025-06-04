@@ -38,7 +38,8 @@ class QuickUnion(UnionFind):
         if not (0 <= p < len(self._parent)):
             raise ValueError(f"Element {p} is out of bounds.")
         
-        # Navigate up the tree to find the root
+        # TODO Exercise: Implement path compression here to flatten the tree.
+        # While traversing up to find the root, make each node on the path point directly to the root.
         while p != self._parent[p]:
             p = self._parent[p]
         return p
@@ -100,4 +101,4 @@ if __name__=="__main__":
     qu.union(0,4)
     print(qu.components())
     print(qu.is_connected(1,4))
-    print(qu.is_connected(2,1))    
+    print(qu.is_connected(2,1))

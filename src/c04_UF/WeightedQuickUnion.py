@@ -41,6 +41,11 @@ class WeightedQuickUnion(UnionFind):
         if not (0 <= p < len(self._parent)):
             raise ValueError(f"Element {p} is out of bounds.")
         
+        # TODO Exercise: Consider implementing path halving or path splitting
+        # as an alternative to full path compression for a simpler, yet effective, optimization.
+        # Path halving: p = self._parent[self._parent[p]]
+        # Path splitting: temp = self._parent[p]; self._parent[p] = self._parent[temp]; p = temp
+        
         # Navigate up the tree to find the root
         root = p
         while root != self._parent[root]:
@@ -75,7 +80,12 @@ class WeightedQuickUnion(UnionFind):
         if rootP == rootQ:
             return  # p and q are already in the same component
 
-        # Link the smaller tree under the root of the larger tree
+        # TODO Exercise: Implement union by rank instead of union by size.
+        # Maintain a 'rank' (approximate height) for each root.
+        # Link the root of the tree with smaller rank under the root of the tree with larger rank.
+        # If ranks are equal, link one under the other and increment the rank of the new root.
+        
+        # Link the smaller tree under the root of the larger tree (union by size)
         if self._size[rootP] < self._size[rootQ]:
             self._parent[rootP] = rootQ
             self._size[rootQ] += self._size[rootP]
