@@ -1,5 +1,5 @@
 from typing import Any, Optional
-from src.c02_ESTBASICAS.LinkedList import Node # Import Node for internal use
+from c02_ESTBASICAS.LinkedList import Node # Import Node for internal use
 
 class Queue:
     """
