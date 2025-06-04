@@ -4,7 +4,7 @@
 mindmap
   root((Sorting Algorithms))
     SelectionSort
-        Order: O(n^2)
+        Order: $O(n^2)$
         In place: Yes
         Stable: Yes
     InsertionSort
