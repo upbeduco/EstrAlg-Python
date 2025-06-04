@@ -71,6 +71,64 @@ Given a BST or RedBlackST and a key, implement functions to find:
 
 ---
 
+## 6. Validate BST Properties
+
+**Problem:**  
+Implement a function to verify if a given binary tree satisfies the BST property (i.e., for every node, all keys in the left subtree are less, and all keys in the right subtree are greater).
+
+**Questions:**  
+- How can you efficiently check the BST property?
+- What is the time complexity of your validation function?
+
+---
+
+## 7. Height and Balance
+
+**Problem:**  
+Write functions to compute:
+- The height of a BST or RedBlackST.
+- Whether the tree is balanced (height difference between left and right subtrees of every node is at most 1).
+
+**Questions:**  
+- How does tree height affect performance of operations?
+- Why are RedBlackSTs generally balanced?
+
+---
+
+## 8. Tree Traversals
+
+**Problem:**  
+Implement in-order, pre-order, and post-order traversals of BST or RedBlackST, returning the list of keys.
+
+**Questions:**  
+- How do these traversals differ in their order of visiting nodes?
+- What are practical uses of each traversal?
+
+---
+
+## 9. Lowest Common Ancestor (LCA)
+
+**Problem:**  
+Given a BST or RedBlackST and two keys, implement a function to find their lowest common ancestor.
+
+**Questions:**  
+- How can the BST property help find the LCA efficiently?
+- What is the time complexity of your solution?
+
+---
+
+## 10. Bulk Insertion and Performance
+
+**Problem:**  
+Insert a large number of keys (e.g., 10,000 random integers) into both a BST and a RedBlackST.  
+- Measure and compare the time taken for insertions.
+- Measure the height of both trees after insertion.
+
+**Questions:**  
+- How does balancing affect insertion time and tree height?
+- Why might RedBlackST be preferred for large datasets?
+
+---
 
 *For each exercise, implement the required functions using either `bst.py` or `red_black_st.py`. Discuss your reasoning and the advantages of using tree-based structures for these problems.*
 
