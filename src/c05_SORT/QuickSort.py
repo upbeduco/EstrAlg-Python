@@ -1,7 +1,7 @@
 
 
 def QuickSort(a: list) -> list:
-    """Sort the list a using the quicksort algorithm and return the sorted list."""
+    """Sort the list a using the quicksort algorithm in place and return the same list."""
     def _quicksort(arr, low, high):
         if low < high:
             p = _partition(arr, low, high)
@@ -18,9 +18,8 @@ def QuickSort(a: list) -> list:
         arr[i + 1], arr[high] = arr[high], arr[i + 1]
         return i + 1
 
-    arr_copy = a.copy()
-    _quicksort(arr_copy, 0, len(arr_copy) - 1)
-    return arr_copy
+    _quicksort(a, 0, len(a) - 1)
+    return a
 
 
 # TODO Exercise: write a unit test showing the correct operation of the sorting algorithm
