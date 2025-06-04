@@ -27,3 +27,25 @@ def CountSort(a: list) -> list:
 
 # TODO write a unit test showing the correct operation of the sorting algorithm
 
+
+def _test_CountSort():
+    test_cases = [
+        ([5, 3, 8, 6, 2, 7, 4, 1], [1, 2, 3, 4, 5, 6, 7, 8]),
+        ([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]),
+        ([5, 4, 3, 2, 1], [1, 2, 3, 4, 5]),
+        ([1], [1]),
+        ([], []),
+        ([3, 3, 3], [3, 3, 3]),
+        ([10, -1, 2, 5, 0], [-1, 0, 2, 5, 10]),
+    ]
+
+    for i, (input_list, expected) in enumerate(test_cases):
+        result = CountSort(input_list)
+        assert result == expected, f"Test case {i+1} failed: expected {expected}, got {result}"
+
+    print("All CountSort tests passed.")
+
+
+if __name__ == "__main__":
+    _test_CountSort()
+
