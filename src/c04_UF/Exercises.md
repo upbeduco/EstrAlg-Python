@@ -111,4 +111,3 @@ This document contains a set of exercises to practice using the Union-Find Abstr
 3. For each `query` command, print "YES" if `p` and `q` are connected, and "NO" otherwise.
 4. Consider the efficiency of your chosen Union-Find implementation for a large number of operations.
 
-**Example Input:**
