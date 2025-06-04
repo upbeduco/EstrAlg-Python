@@ -25,6 +25,7 @@ def test_SelectionSort():
 def animate_SelectionSort(a: list):
     """Produce an animation of the selection sort process by printing the list at each step."""
     n = len(a)
+    print(f"Initial: {a}")
     for i in range(n):
         min_index = i
         for j in range(i+1, n):
