@@ -2,13 +2,13 @@
 import random
 import time
 from copy import deepcopy
-from src.c05_SORT.CountSort import CountSort
-from src.c05_SORT.InsertionSort import InsertionSort
-from src.c05_SORT.MergeSort import MergeSort
-from src.c05_SORT.QuickSort import QuickSort
-from src.c05_SORT.RadixSort import RadixSort
-from src.c05_SORT.SelectionSort import SelectionSort
-from src.c05_SORT.ShellSort import ShellSort
+from c05_SORT.CountSort import CountSort
+from c05_SORT.InsertionSort import InsertionSort
+from c05_SORT.MergeSort import MergeSort
+from c05_SORT.QuickSort import QuickSort
+from c05_SORT.RadixSort import RadixSort
+from c05_SORT.SelectionSort import SelectionSort
+from c05_SORT.ShellSort import ShellSort
 
 
 def create_random_list(n: int, max_value: int = 10000) -> list:
@@ -40,7 +40,7 @@ def compare_sorting_algorithms(n: int):
 
 
 def main():
-    n = 10000  # You can adjust the size for testing
+    n = 50000  # You can adjust the size for testing
     print(f"Comparing sorting algorithms with list size: {n}")
     compare_sorting_algorithms(n)
 
