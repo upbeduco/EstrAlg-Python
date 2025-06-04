@@ -131,3 +131,12 @@ class LinkedList:
         if self.is_empty():
             raise IndexError("peek_head from empty list")
         return self._head.data
+
+    def __iter__(self):
+        """
+        Returns an iterator for the elements in the list, from head to tail.
+        """
+        current = self._head
+        while current:
+            yield current.data
+            current = current.next

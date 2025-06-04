@@ -118,3 +118,12 @@ class DoublyLinkedList:
                 return True
             current = current._next
         return False
+
+    def __iter__(self):
+        """
+        Returns an iterator for the elements in the list, from head to tail.
+        """
+        current = self._head
+        while current:
+            yield current.data
+            current = current._next

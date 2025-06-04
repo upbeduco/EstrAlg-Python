@@ -1,5 +1,5 @@
 from typing import Any, Optional
-from c02_ESTBASICAS.LinkedList import Node # Import Node for internal use
+from src.c02_ESTBASICAS.LinkedList import Node # Import Node for internal use
 
 class Queue:
     """
@@ -81,3 +81,12 @@ class Queue:
             bool: True if the queue is empty, False otherwise.
         """
         return self._size == 0
+
+    def __iter__(self):
+        """
+        Returns an iterator for the elements in the queue, from front to rear (FIFO order).
+        """
+        current = self._head
+        while current:
+            yield current.data
+            current = current.next

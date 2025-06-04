@@ -1,5 +1,5 @@
 from typing import Any
-from c02_ESTBASICAS.LinkedList import LinkedList
+from src.c02_ESTBASICAS.LinkedList import LinkedList
 
 class Stack:
     """
@@ -61,3 +61,9 @@ class Stack:
             int: The number of items.
         """
         return self._list.size()
+
+    def __iter__(self):
+        """
+        Returns an iterator for the elements in the stack, from top to bottom (LIFO order).
+        """
+        return iter(self._list) # Delegate to the underlying LinkedList's iterator
