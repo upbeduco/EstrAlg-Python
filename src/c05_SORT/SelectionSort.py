@@ -33,3 +33,10 @@ def animate_SelectionSort(a: list):
         a[i], a[min_index] = a[min_index], a[i]
         print(f"Step {i+1}: {a}")
 
+
+if __name__ == "__main__":
+    test_SelectionSort()
+    print("\nAnimation of SelectionSort:")
+    sample_list = [64, 25, 12, 22, 11]
+    animate_SelectionSort(sample_list)
+
