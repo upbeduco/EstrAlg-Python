@@ -1,3 +1,4 @@
+Follow these conventions when implementing code:
 - Use types everywhere possible.
-- TODO Exercises are to be implemented by the student. Do no write an implementation for these parts of the code.
+- `TODO Exercise` are to be implemented by the student. Do no write an implementation of these TODOs.
 - Include concise docstrigs where applicable.
