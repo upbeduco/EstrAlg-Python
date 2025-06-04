@@ -39,3 +39,25 @@ def _counting_sort_for_radix(a: list, exp: int) -> list:
 
 # TODO write a unit test showing the correct operation of the sorting algorithm
 
+
+def _test_RadixSort():
+    test_cases = [
+        ([170, 45, 75, 90, 802, 24, 2, 66], [2, 24, 45, 66, 75, 90, 170, 802]),
+        ([1, 2, 3, 4, 5], [1, 2, 3, 4, 5]),
+        ([5, 4, 3, 2, 1], [1, 2, 3, 4, 5]),
+        ([1], [1]),
+        ([], []),
+        ([3, 3, 3], [3, 3, 3]),
+        ([10, 1, 2, 5, 0], [0, 1, 2, 5, 10]),
+    ]
+
+    for i, (input_list, expected) in enumerate(test_cases):
+        result = RadixSort(input_list)
+        assert result == expected, f"Test case {i+1} failed: expected {expected}, got {result}"
+
+    print("All RadixSort tests passed.")
+
+
+if __name__ == "__main__":
+    _test_RadixSort()
+
