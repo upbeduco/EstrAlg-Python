@@ -2,6 +2,8 @@
 
 Below are practical exercises to help you understand how Binary Search Trees (BST) and Red-Black Trees (RedBlackST) can be used to solve problems efficiently. For each exercise, think about how the tree structure enables efficient operations and how you would implement the solution.
 
+**Note:** For all exercises, you should use and extend the provided `bst.py` and `red_black_st.py` files as the basis for your implementations. Refer to `CONVENTIONS.md` for coding style guidelines.
+
 ---
 
 ## 1. Word Frequency Counter
@@ -130,5 +132,15 @@ Insert a large number of keys (e.g., 10,000 random integers) into both a BST and
 
 ---
 
-*For each exercise, implement the required functions using either `bst.py` or `red_black_st.py`. Discuss your reasoning and the advantages of using tree-based structures for these problems.*
+## 11. Tree Iterators
 
+**Problem:**  
+Implement an in-order iterator for both the `BST` and `RedBlackST` classes. This means adding a `__iter__` method to each class that yields keys in sorted order.
+
+**Questions:**  
+- What are the advantages of using an iterator over returning a full list of keys (e.g., the existing `keys()` method), especially for very large trees?
+- How does the in-order traversal naturally lend itself to sorted iteration?
+
+---
+
+*For each exercise, implement the required functions using either `bst.py` or `red_black_st.py`. Discuss your reasoning and the advantages of using tree-based structures for these problems.*
