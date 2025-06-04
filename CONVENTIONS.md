@@ -1,0 +1,3 @@
+- Use types everywhere possible.
+- TODO Exercises are to be implemented by the student. Do no write an implementation for these parts of the code.
+- Include concise docstrigs where applicable.
