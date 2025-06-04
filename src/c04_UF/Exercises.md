@@ -101,4 +101,14 @@ This document contains a set of exercises to practice using the Union-Find Abstr
 3. Explain how the weighted union heuristic helps prevent the formation of such degenerate tree structures.
 4. What is the nearly constant amortized time complexity achieved when both optimizations are used? (e.g., O(α(n)), where α is the inverse Ackermann function).
 
-These exercises should provide a good basis for understanding and applying Union-Find data structures. Remember to consider the time complexity implications of the different Union-Find implementations (QuickFind, QuickUnion, WeightedQuickUnion) when applicable.
+## Exercise 7: Dynamic Connectivity
+
+**Problem:** You are given `N` items, initially disconnected. You need to process a sequence of operations. Each operation is either a `union(p, q)` (connects item `p` and item `q`) or a `query(p, q)` (asks if item `p` and item `q` are currently connected).
+
+**Tasks:**
+1. Implement a program that reads `N` and then processes a series of commands.
+2. For each `union` command, perform the union operation.
+3. For each `query` command, print "YES" if `p` and `q` are connected, and "NO" otherwise.
+4. Consider the efficiency of your chosen Union-Find implementation for a large number of operations.
+
+**Example Input:**
