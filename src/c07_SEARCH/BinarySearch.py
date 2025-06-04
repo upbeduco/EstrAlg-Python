@@ -79,3 +79,35 @@ class BinarySearch:
         return self._keys[k]
 
 # TODO add unit tests of the data structure
+
+if __name__ == "__main__":
+    bs = BinarySearch()
+    assert bs.is_empty()
+    assert bs.size() == 0
+    assert bs.get("a") is None
+    assert not bs.contains("a")
+
+    bs.put("a", 1)
+    assert not bs.is_empty()
+    assert bs.size() == 1
+    assert bs.get("a") == 1
+    assert bs.contains("a")
+
+    bs.put("b", 2)
+    bs.put("c", 3)
+    assert bs.size() == 3
+    assert bs.get("b") == 2
+    assert bs.get("c") == 3
+
+    bs.put("a", 10)  # update
+    assert bs.get("a") == 10
+
+    bs.delete("b")
+    assert bs.size() == 2
+    assert not bs.contains("b")
+    assert bs.get("b") is None
+
+    bs.delete("a")
+    bs.delete("c")
+    assert bs.is_empty()
+    assert bs.size() == 0
