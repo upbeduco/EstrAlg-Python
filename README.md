@@ -21,5 +21,6 @@ Examples and exercises about Data Structures and Algorithms in Python
 - Jules
 - Copilot
 - Cursor
+- Gemini
 
 

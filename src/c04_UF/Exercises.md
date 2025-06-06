@@ -111,3 +111,26 @@ This document contains a set of exercises to practice using the Union-Find Abstr
 3. For each `query` command, print "YES" if `p` and `q` are connected, and "NO" otherwise.
 4. Consider the efficiency of your chosen Union-Find implementation for a large number of operations.
 
+
+## Exercise 8: Grid Percolation (Conceptual)
+
+**Problem:** Imagine a 2D grid of `N x N` sites. Each site can either be "open" or "blocked". A system "percolates" if there is a path of open sites from the top row to the bottom row.
+
+**Tasks:**
+1. **Conceptual Mapping:** How would you represent this grid problem using a Union-Find data structure?
+    *   How many elements would your Union-Find structure need? (Hint: consider virtual top/bottom nodes).
+    *   When an individual site `(row, col)` is opened, what `union` operations would you perform?
+2. **Percolation Check:** How would you use the `is_connected` operation to determine if the system percolates?
+3. **Challenge (Optional):** Describe how you would handle the case where a site is opened and needs to be connected to its already open neighbors.
+
+## Exercise 9: Union-Find with Component Listing
+
+**Problem:** Extend one of the existing Union-Find implementations (e.g., `WeightedQuickUnion`) to allow retrieving all elements that belong to a specific component. That is, given an element `p`, return a list of all elements `q` such that `is_connected(p, q)` is true.
+
+**Tasks:**
+1. Modify the `__init__` method to include an additional data structure (e.g., a list of lists or a dictionary mapping roots to sets of elements) that keeps track of which elements belong to which component.
+2. Update the `union` method to correctly merge these component lists/sets when two components are unified.
+3. Implement a new method, `get_component_elements(p: int) -> List[int]`, which returns a list of all elements in the same component as `p`.
+4. Ensure that your `find` operation (especially with path compression) correctly interacts with this new data structure, or that the `get_component_elements` method correctly uses the `find` operation to identify the root and then retrieve its associated elements.
+
+These exercises should provide a good basis for understanding and applying Union-Find data structures. Remember to consider the time complexity implications of the different Union-Find implementations (QuickFind, QuickUnion, WeightedQuickUnion) when applicable.
