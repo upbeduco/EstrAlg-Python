@@ -184,7 +184,7 @@ class RedBlackST:
     def move_red_left(self, h: Node) -> Node:
         # Ensure left child or one of its children is red
         self.flip_colors(h)
-        if self.is_red(h.right.left):
+        if h.right and self.is_red(h.right.left):
             h.right = self.rotate_right(h.right)
             h = self.rotate_left(h)
             self.flip_colors(h)
@@ -193,7 +193,7 @@ class RedBlackST:
     def move_red_right(self, h: Node) -> Node:
         # Ensure right child or one of its children is red
         self.flip_colors(h)
-        if self.is_red(h.left.left):
+        if h.left and self.is_red(h.left.left):
             h = self.rotate_right(h)
             self.flip_colors(h)
         return h
@@ -214,7 +214,8 @@ class RedBlackST:
         # Remove node with given key
         if key is None:
             return 
-        if not self.get(key):
+        get_result = self.get(key)
+        if get_result is None:
             return
         if not self.is_red(self.root.left) and not self.is_red(self.root.right):
             self.root.color = Node.RED
@@ -227,7 +228,6 @@ class RedBlackST:
         elif self.root is not None:
             self.root.color = Node.BLACK
 
-
     def _delete(self, h: Node | None, key: Any) -> Node | None:
         if h is None:
             return None
@@ -239,8 +239,9 @@ class RedBlackST:
         else:
             if self.is_red(h.left):
                 h = self.rotate_right(h)
-            if key == h.key and h.left is None and h.right is None:
-                return None  # No children case (leaf)
+            # Now check if this is the key we want to delete and if it's a leaf
+            if key == h.key and h.right is None:
+                return None  # Leaf or node with only left child (after potential rotation)
             if h.right and not self.is_red(h.right) and not self.is_red(h.right.left):
                 h = self.move_red_right(h)
             if key == h.key:
@@ -251,10 +252,7 @@ class RedBlackST:
             else:
                 h.right = self._delete(h.right, key)
 
-        h = self.balance(h)
-        h.count = 1 + self._size(h.left) + self._size(h.right)
-        return h
-
+        return self.balance(h)
 
     def __contains__(self, key: Any) -> bool:
         # Return True if key is in the tree, else False
@@ -291,6 +289,22 @@ class RedBlackST:
         if self.root is None:
             return "<empty tree>"
         return "\n".join(_display(self.root, "", True))
+
+    def keys(self):
+        """Return all keys in the tree in sorted order."""
+        if self.is_empty():
+            return []
+        return self._keys(self.root)
+    
+    def _keys(self, node: Node | None):
+        """Helper method to collect keys in sorted order."""
+        if node is None:
+            return []
+        keys_list = []
+        keys_list.extend(self._keys(node.left))
+        keys_list.append(node.key)
+        keys_list.extend(self._keys(node.right))
+        return keys_list
 
 if __name__ == "__main__":
     # Example usage: create a RedBlackST and print its ASCII-art representation

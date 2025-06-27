@@ -1,3 +1,6 @@
+# To run the tests:
+# PYTHONPATH=src python3 -m c08_BST.red_black_st_deletion_tests
+
 import unittest
 from .red_black_st import RedBlackST, Node  # Import Node to check color if needed
 

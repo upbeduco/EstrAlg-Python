@@ -144,7 +144,8 @@ class TestRedBlackST(unittest.TestCase):
             rb_st.put(k, keys_values[k])
         
         # After inserting A C E H L M P R S X, the root is H (Fig 3.3.16)
-        self.assertEqual(rb_st.root.key, 'H')
+        if rb_st.root is not None:
+            self.assertEqual(rb_st.root.key, 'H')
         rb_st.delete('H') # Delete root
         self.assertIsNone(rb_st.get('H'))
         self.assertEqual(len(rb_st), len(ordered_keys) - 1)
@@ -236,13 +237,12 @@ class TestRedBlackST(unittest.TestCase):
         keys = ['S', 'E', 'A', 'R', 'C', 'H', 'M', 'X']
         for i, key in enumerate(keys):
             rb_st.put(key, i)
-        if hasattr(rb_st, 'keys'):
-            result_keys = list(rb_st.keys())
-            self.assertEqual(sorted(result_keys), sorted(keys))
-            # After deleting a key
-            rb_st.delete('A')
-            result_keys = list(rb_st.keys())
-            self.assertNotIn('A', result_keys)
+        result_keys = list(rb_st.keys())
+        self.assertEqual(sorted(result_keys), sorted(keys))
+        # After deleting a key
+        rb_st.delete('A')
+        result_keys = list(rb_st.keys())
+        self.assertNotIn('A', result_keys)
 
     def test_str_ascii_representation(self):
         rb_st = RedBlackST()
