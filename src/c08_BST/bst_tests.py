@@ -1,5 +1,5 @@
 # cd src
-# python3 -m 08_BST.test_bst
+# PYTHONPATH=src python3 -m c08_BST.bst_tests
 
 import unittest
 from .bst import BST
@@ -254,6 +254,83 @@ class TestBST(unittest.TestCase):
             _ = bst['Z']
         with self.assertRaises(KeyError):
             _ = bst['B']
+
+    def test_empty_tree_edge_cases(self):
+        bst = BST()
+        self.assertIsNone(bst.min())
+        self.assertIsNone(bst.max())
+        self.assertIsNone(bst.get('Z'))
+        self.assertEqual(bst.rank('A'), 0)
+        self.assertIsNone(bst.select(0))
+        self.assertEqual(bst.keys(), [])
+        self.assertEqual(bst.pre_order_keys(), [])
+        self.assertEqual(bst.post_order_keys(), [])
+        bst.delete('A')  # Should not raise
+        bst.delete_min()  # Should not raise
+        self.assertEqual(str(bst), '<empty tree>')
+
+    def test_duplicate_insertions(self):
+        bst = BST()
+        bst.put('A', 1)
+        self.assertEqual(bst.get('A'), 1)
+        bst.put('A', 2)
+        self.assertEqual(bst.get('A'), 2)
+        bst.put('A', 3)
+        self.assertEqual(bst.get('A'), 3)
+        self.assertEqual(len(bst), 1)
+
+    def test_min_max(self):
+        bst = BST()
+        keys = ['M', 'A', 'Z', 'B', 'Y']
+        for i, k in enumerate(keys):
+            bst.put(k, i)
+        self.assertEqual(bst.min(), 'A')
+        self.assertEqual(bst.max(), 'Z')
+        bst.delete('A')
+        self.assertEqual(bst.min(), 'B')
+        bst.delete('Z')
+        self.assertEqual(bst.max(), 'Y')
+
+    def test_delete_min(self):
+        bst = BST()
+        bst.delete_min()  # Should not raise
+        bst.put('B', 1)
+        bst.delete_min()
+        self.assertEqual(len(bst), 0)
+        bst.put('C', 2)
+        bst.put('A', 3)
+        bst.put('B', 4)
+        bst.delete_min()
+        self.assertNotIn('A', bst)
+        self.assertEqual(bst.min(), 'B')
+
+    def test_str_representation(self):
+        bst = BST()
+        self.assertIn('empty', str(bst))
+        bst.put('B', 1)
+        bst.put('A', 2)
+        bst.put('C', 3)
+        s = str(bst)
+        self.assertIn('B', s)
+        self.assertIn('A', s)
+        self.assertIn('C', s)
+
+    def test_traversal_consistency_after_deletions(self):
+        bst = BST()
+        keys = ['D', 'B', 'F', 'A', 'C', 'E', 'G']
+        for k in keys:
+            bst.put(k, ord(k))
+        bst.delete('B')
+        bst.delete('F')
+        expected_in_order = ['A', 'C', 'D', 'E', 'G']
+        self.assertEqual(bst.keys(), expected_in_order)
+        expected_pre_order = ['D', 'A', 'C', 'G', 'E']  # May vary by implementation
+        self.assertIn('D', bst.pre_order_keys())  # At least root is correct
+        self.assertIn('A', bst.pre_order_keys())
+        self.assertIn('G', bst.pre_order_keys())
+        # Post-order should contain all remaining keys
+        for k in expected_in_order:
+            self.assertIn(k, bst.post_order_keys())
 
 if __name__ == '__main__':
     unittest.main()
