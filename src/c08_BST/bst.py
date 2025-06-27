@@ -14,13 +14,13 @@ class BST:
 
     def __init__(self) -> None:
         """Initialize an empty BST."""
-        self.root: Optional[Node] = None
+        self.root: Node | None = None
 
     def size(self) -> int:
         """Return the total number of nodes in the BST."""
         return self._size(self.root)
 
-    def _size(self, node: Optional[Node]) -> int:
+    def _size(self, node: Node | None) -> int:
         """Return the number of nodes in the subtree rooted at node."""
         if node is None:
             return 0
@@ -30,7 +30,7 @@ class BST:
         """Insert key-value pair into the BST."""
         self.root = self._put(self.root, key, value)
 
-    def _put(self, node: Optional[Node], key: Any, value: Any) -> Node:
+    def _put(self, node: Node | None, key: Any, value: Any) -> Node:
         """Helper for put: insert key-value in subtree rooted at node."""
         if node is None:
             return Node(key, value, 1)
@@ -50,7 +50,7 @@ class BST:
         node = self._get(self.root, key)
         return node.value if node else None
 
-    def _get(self, node: Optional[Node], key: Any) -> Optional[Node]:
+    def _get(self, node: Node | None, key: Any) -> Node | None:
         """Helper for get: search for key in subtree rooted at node."""
         if node is None:
             return None
@@ -84,7 +84,7 @@ class BST:
             return
         self.root = self._delete_min(self.root)
 
-    def _delete_min(self, node: Node) -> Optional[Node]:
+    def _delete_min(self, node: Node) -> Node | None:
         """Helper for delete_min: remove min node in subtree."""
         if node.left is None:
             return node.right
@@ -96,7 +96,7 @@ class BST:
         """Remove the node with the given key."""
         self.root = self._delete(self.root, key)
 
-    def _delete(self, node: Optional[Node], key: Any) -> Optional[Node]:
+    def _delete(self, node: Node | None, key: Any) -> Node | None:
         """Helper for delete: remove key from subtree rooted at node."""
         if node is None:
             return None
@@ -123,7 +123,7 @@ class BST:
         """Return the number of keys less than the given key."""
         return self._rank(key, self.root)
 
-    def _rank(self, key: Any, node: Optional[Node]) -> int:
+    def _rank(self, key: Any, node: Node | None) -> int:
         """Helper for rank: compute rank of key in subtree rooted at node."""
         if node is None:
             return 0
@@ -140,7 +140,7 @@ class BST:
         node = self._select(self.root, k)
         return node.key if node else None
 
-    def _select(self, node: Optional[Node], k: int) -> Optional[Node]:
+    def _select(self, node: Node | None, k: int) -> Node | None:
         """Helper for select: find node of rank k in subtree."""
         if node is None:
             return None
@@ -159,7 +159,7 @@ class BST:
         self._keys(self.root, queue)
         return queue
 
-    def _keys(self, node: Optional[Node], queue: List[Any]) -> None:
+    def _keys(self, node: Node | None, queue: List[Any]) -> None:
         """Helper for keys: in-order traversal to collect keys."""
         if node is None:
             return
@@ -173,7 +173,7 @@ class BST:
         self._pre_order_keys(self.root, queue)
         return queue
 
-    def _pre_order_keys(self, node: Optional[Node], queue: List[Any]) -> None:
+    def _pre_order_keys(self, node: Node | None, queue: List[Any]) -> None:
         """Helper for pre_order_keys: pre-order traversal to collect keys."""
         if node is None:
             return
@@ -187,7 +187,7 @@ class BST:
         self._post_order_keys(self.root, queue)
         return queue
 
-    def _post_order_keys(self, node: Optional[Node], queue: List[Any]) -> None:
+    def _post_order_keys(self, node: Node | None, queue: List[Any]) -> None:
         """Helper for post_order_keys: post-order traversal to collect keys."""
         if node is None:
             return

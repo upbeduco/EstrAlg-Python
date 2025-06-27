@@ -2,8 +2,6 @@
 
 These exercises are designed to deepen your understanding of hash tables, their implementation, performance characteristics, and practical applications. You will be working primarily with the `ChainingST` (Chaining Symbol Table) implementation provided in `chained_hashing.py` and potentially creating new hash table implementations.
 
-Follow the conventions outlined in `CONVENTIONS.md`.
-
 ## Exercise 1: Understanding and Extending the Chaining Hash Table
 *   Review the provided `ChainingST` class in `src/c09_HASHTABLE/chained_hashing.py`.
     *   Ensure you understand how `put`, `get`, `delete`, `hash`, `__len__`, `__contains__`, `keys`, `clear`, and `rehash` methods work.
@@ -93,3 +91,28 @@ Follow the conventions outlined in `CONVENTIONS.md`.
     *   Define a class `HashSet` that uses an internal `ChainingST` (or `LinearProbingST`) to store elements. Since a set only stores keys, the values in the internal hash table can be arbitrary (e.g., `True` or `None`).
     *   Implement standard set operations: `add(element)`, `remove(element)`, `contains(element)`, `__len__`, `is_empty`, `clear`, `__iter__`.
     *   Discuss how a hash set compares to other set implementations (e.g., using sorted arrays or BSTs) in terms of performance.
+
+## Exercise 13: Thread-Safe Hash Table
+* Implement a thread-safe version of `ChainingST` using Python's `threading.Lock` or `RLock`.
+* Write a test script that spawns multiple threads performing `put`, `get`, and `delete` operations concurrently.
+* Discuss the challenges and trade-offs of making hash tables thread-safe.
+
+## Exercise 14: Hash Table Serialization and Persistence
+* Add methods to `ChainingST` to serialize the hash table to a file (e.g., using JSON or pickle).
+* Implement a method to load a hash table from a file.
+* Test persistence by saving a hash table, clearing it, and then restoring it from disk.
+
+## Exercise 15: Custom Load Factor Strategies
+* Experiment with different load factor thresholds for resizing (e.g., aggressive vs. conservative resizing).
+* Measure and compare the performance and memory usage of each strategy.
+* Discuss the impact of load factor choices on performance and memory.
+
+## Exercise 16: Hash Table with Expiry (TTL)
+* Extend `ChainingST` to support time-to-live (TTL) for keys.
+* Each key-value pair should have an optional expiry time; expired keys are automatically removed or ignored on access.
+* Write tests to verify correct expiry behavior.
+
+## Exercise 17: Hash Table Visualization
+* Write a script that visualizes the internal state of a hash table (e.g., using `matplotlib` or `graphviz`).
+* Show the distribution of keys, bucket sizes, and optionally, probe sequences for open addressing.
+* Use this visualization to demonstrate the effects of good and bad hash functions.

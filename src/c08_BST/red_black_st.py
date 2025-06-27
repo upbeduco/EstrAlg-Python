@@ -14,15 +14,15 @@ class Node:
 
 class RedBlackST:
     def __init__(self) -> None:
-        self.root: Optional[Node] = None
+        self.root: Node | None = None
 
-    def is_red(self, node: Optional[Node]) -> bool:
+    def is_red(self, node: Node | None) -> bool:
         """Return True if node is red; None is considered black."""
         if node is None:
             return False
         return node.color == Node.RED
 
-    def _size(self, node: Optional[Node]) -> int:
+    def _size(self, node: Node | None) -> int:
         # Return size of subtree rooted at node
         if node is None:
             return 0
@@ -41,7 +41,9 @@ class RedBlackST:
         return self.root is None
 
     def rotate_left(self, h: Node) -> Node:
-        # Rotate node h left to fix right-leaning red link
+        """Rotate node h left to fix right-leaning red link."""
+        if h.right is None:
+            raise ValueError("rotate_left called on a node with no right child")
         x = h.right
         h.right = x.left
         x.left = h
@@ -63,10 +65,12 @@ class RedBlackST:
         return x
 
     def flip_colors(self, h: Node) -> None:
-        # Flip colors to split a temporary 4-node
+        """Flip colors to split a temporary 4-node."""
         h.color = not h.color
-        h.left.color = not h.left.color
-        h.right.color = not h.right.color
+        if h.left is not None:
+            h.left.color = not h.left.color
+        if h.right is not None:
+            h.right.color = not h.right.color
 
     def put(self, key: Any, value: Any) -> None:
         # Insert key-value pair into the tree
@@ -76,7 +80,7 @@ class RedBlackST:
         self.root = self._put(self.root, key, value)
         self.root.color = Node.BLACK
 
-    def _put(self, h: Optional[Node], key: Any, value: Any) -> Node:
+    def _put(self, h: Node | None, key: Any, value: Any) -> Node:
         # Recursive helper for put
         if h is None:
             return Node(key, value, Node.RED, 1)
@@ -94,7 +98,7 @@ class RedBlackST:
             return None
         return self._get(self.root, key)
 
-    def _get(self, x: Optional[Node], key: Any) -> Optional[Any]:
+    def _get(self, x: Node | None, key: Any) -> Optional[Any]:
         # Iterative search for key
         while x is not None:
             if key < x.key:
@@ -109,10 +113,13 @@ class RedBlackST:
         # Return minimum key in the tree
         if self.is_empty():
             return None
-        return self._min(self.root).key
+        min_node = self._min(self.root)
+        return min_node.key if min_node else None
 
-    def _min(self, x: Node) -> Node:
+    def _min(self, x: Node | None) -> Node | None:
         # Find node with minimum key
+        if x is None:
+            return None
         if x.left is None:
             return x
         return self._min(x.left)
@@ -121,10 +128,13 @@ class RedBlackST:
         # Return maximum key in the tree
         if self.is_empty():
             return None
-        return self._max(self.root).key
+        max_node = self._max(self.root)
+        return max_node.key if max_node else None
 
-    def _max(self, x: Node) -> Node:
+    def _max(self, x: Node | None) -> Node | None:
         # Find node with maximum key
+        if x is None:
+            return None
         if x.right is None:
             return x
         return self._max(x.right)
@@ -139,8 +149,10 @@ class RedBlackST:
         if not self.is_empty():
             self.root.color = Node.BLACK
 
-    def _delete_min(self, h: Node) -> Optional[Node]:
+    def _delete_min(self, h: Node | None) -> Node | None:
         # Recursive helper to delete minimum node
+        if h is None:
+            return None
         if h.left is None:
             return None
         if not self.is_red(h.left) and not self.is_red(h.left.left):
@@ -158,7 +170,7 @@ class RedBlackST:
         if not self.is_empty():
             self.root.color = Node.BLACK
 
-    def _delete_max(self, h: Node) -> Optional[Node]:
+    def _delete_max(self, h: Node) -> Node | None:
         # Recursive helper to delete maximum node
         if self.is_red(h.left):
             h = self.rotate_right(h)
@@ -208,15 +220,15 @@ class RedBlackST:
             self.root.color = Node.RED
             
         self.root = self._delete(self.root, key)
-        
-        # Fix: If root becomes None or tree is empty after deletion, ensure root is None
-        if self.root is None or self.size() == 0:
-            self.root = None
-            return
-            
-        self.root.color = Node.BLACK
 
-    def _delete(self, h: Optional[Node], key: Any) -> Optional[Node]:
+        # After deletion, if the tree is empty, ensure root is None
+        if self.root is not None and self._size(self.root) == 0:
+            self.root = None
+        elif self.root is not None:
+            self.root.color = Node.BLACK
+
+
+    def _delete(self, h: Node | None, key: Any) -> Node | None:
         if h is None:
             return None
 
@@ -227,8 +239,8 @@ class RedBlackST:
         else:
             if self.is_red(h.left):
                 h = self.rotate_right(h)
-            if key == h.key and h.right is None:
-                return None  # No children case
+            if key == h.key and h.left is None and h.right is None:
+                return None  # No children case (leaf)
             if h.right and not self.is_red(h.right) and not self.is_red(h.right.left):
                 h = self.move_red_right(h)
             if key == h.key:
@@ -310,7 +322,7 @@ When a node is deleted, it may violate RBT properties (e.g., if a black node was
 
 #### **Key Observations:**
 - The deleted node is either:
-  - A **red node** (no violation, since it doesn’t affect black height).
+  - A **red node** (no violation, since it doesn't affect black height).
   - A **black node** (violation: introduces a "double black" or "extra black" that must be resolved).
 - The rebalancing cases depend on the **color of the sibling** and **its children**.
 

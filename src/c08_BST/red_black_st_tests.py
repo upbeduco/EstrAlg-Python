@@ -1,5 +1,8 @@
+# To run the tests:
+# PYTHONPATH=src python3 -m c08_BST.red_black_st_tests
+
 import unittest
-from .red_black_st import RedBlackST, Node # Import Node to check color if needed
+from .red_black_st import RedBlackST, Node
 
 class TestRedBlackST(unittest.TestCase):
     def test_put_and_get(self):
@@ -66,6 +69,7 @@ class TestRedBlackST(unittest.TestCase):
             self.assertEqual(len(rb_st), num_keys - 1 - i)
             self.assertEqual(rb_st.size(), num_keys - 1 - i)
         
+        print("After all deletions:", rb_st.root, len(rb_st))
         self.assertEqual(len(rb_st), 0)
         self.assertEqual(rb_st.size(), 0)
         self.assertTrue(rb_st.is_empty())

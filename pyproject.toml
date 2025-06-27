@@ -13,3 +13,4 @@ Homepage = "https://example.com"
 
 [tool.setuptools.packages]
 find = { where = ["src"] }
+package-dir = {"" = "src"}
